@@ -3,3 +3,5 @@
 .idea
 index.*
 /docker
+docker-compose.yml
+
