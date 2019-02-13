@@ -6,9 +6,9 @@ Simple class for PESEL validation.
 ## Usage
 
 ```php
-$pesel = '12345678901';
-$peselValidator = new PeselValidator($pesel);
-$result = $peselValidator->validatePesel();
+$peselNumber = '12345678901';
+$pesel = new Pesel($peselNumber);
+$result = $pesel->validate();
 ```
 
 ## Contributing

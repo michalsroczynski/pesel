@@ -2,7 +2,7 @@
 
 namespace pesel;
 
-class PeselValidator
+class Pesel
 {
     protected $pesel, $month, $year, $day, $age, $birthDate, $now;
     protected $isAdult = false;
@@ -17,7 +17,7 @@ class PeselValidator
         $this->now = date_create();
     }
 
-    public function validatePesel()
+    public function validate()
     {
         try {
             if ($this->checkIfOnlyNumbers()
