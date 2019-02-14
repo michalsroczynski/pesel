@@ -18,18 +18,17 @@ class Pesel
         $this->sex = $this->setSex(substr($pesel, 9, 1));
     }
 
-    public function validate(): object
+    public function validate(): string
     {
         try {
-            if ($this->checkIfOnlyNumbers()
+            $valid = ($this->checkIfOnlyNumbers()
                 && $this->checkLength()
                 && $this->officialValidation()
-                && $this->verifyBirthDate()
-            ) {
-                return json_encode([
+                && $this->verifyBirthDate());
 
-                ]);
-            }
+            return json_encode([
+                'valid' => $valid
+            ]);
 
         } catch (\Exception $e) {
             echo $e->getMessage();
