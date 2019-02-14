@@ -4,8 +4,9 @@ namespace pesel;
 
 class Pesel
 {
-    protected $pesel, $month, $year, $day, $age, $sex, $birthDate, $now;
+    protected $pesel, $month, $century, $year, $day, $age, $sex, $birthDate, $now;
     protected $isAdult = false;
+    protected $peselIsValid = false;
 
     public function __construct(string $pesel)
     {
@@ -13,25 +14,24 @@ class Pesel
         $this->year = substr($pesel, 0, 2);
         $this->month = substr($pesel, 2, 2);
         $this->day = substr($pesel, 4, 2);
-        $this->birthDate = date_create($this->getCentury() . $this->year . '-' . $this->month . '-' . $this->day);
+        $this->century = $this->getCentury();
+        $this->birthDate = date_create($this->century . $this->year . '-' . $this->month . '-' . $this->day);
         $this->now = date_create();
         $this->sex = $this->setSex(substr($pesel, 9, 1));
     }
 
-    public function validate(): string
+    public function validate(): array
     {
         try {
-            $valid = ($this->checkIfOnlyNumbers()
+            $this->peselIsValid = ($this->checkIfOnlyNumbers()
                 && $this->checkLength()
                 && $this->officialValidation()
                 && $this->verifyBirthDate());
 
-            return json_encode([
-                'valid' => $valid
-            ]);
+            return $this->getResponse();
 
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            return $this->getResponse(true, $e->getMessage());
         }
     }
 
@@ -105,15 +105,32 @@ class Pesel
 
         foreach ($allCorrectMonths as $century => $correctMonths) {
             if (false !== $key = array_search($this->month, $correctMonths)) {
-                $this->month = ++$key;
+                $this->month = sprintf('%02d', ++$key);
                 return $century;
             }
         }
-        throw new \Exception('Invalid month!');
+        throw new \Exception('Invalid month in PESEL!');
     }
 
     protected function setSex($number): string
     {
         return $number % 2 == 0 ? 'Female' : 'Male';
+    }
+
+    protected function getResponse(bool $error = false, string $errorMessage = null): array
+    {
+        return [
+            'valid' => $this->peselIsValid,
+            'sex' => $this->sex,
+            'isAdult' => $this->isAdult,
+            'age' => $this->age,
+            'birthDate' => [
+                'year' => $this->century . $this->year,
+                'month' => $this->month,
+                'day' => $this->day
+            ],
+            'error' => $error,
+            'errorMessage' => $errorMessage
+        ];
     }
 }
