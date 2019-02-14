@@ -1,21 +1,23 @@
-# PESEL Validation
+# PESEL Validation / Walidacja PESEL
 ![](https://img.shields.io/github/license/michalsroczynski/pesel.svg?style=flat)
 ![](https://img.shields.io/github/repo-size/michalsroczynski/pesel.svg?style=plastic)
 ![](https://img.shields.io/github/downloads/michalsroczynski/pesel/total.svg?style=plastic)
 
-Class for PESEL validation.
-
-
 ## Usage
 
+####Create object:
 ```php
 $peselNumber = '12345678901';
 $pesel = new Pesel($peselNumber);
-$result = $pesel->validate();
 ```
 
-```$result``` example:
-```$xslt
+####Validate:
+```php
+$pesel->validate()
+```
+
+result:
+```php
 array (
   'valid' => true,
   'sex' => 'Male',
@@ -30,6 +32,17 @@ array (
   'error' => false,
   'errorMessage' => NULL,
 )
+```
+
+####Get birth date as timestamp:
+
+```php
+$pesel->getBirthDate()
+```
+
+result:
+```
+1546300800
 ```
 
 ## Contributing

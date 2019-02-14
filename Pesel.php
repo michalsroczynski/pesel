@@ -35,6 +35,11 @@ class Pesel
         }
     }
 
+    public function getBirthDate(): int
+    {
+        return $this->birthDate->getTimestamp();
+    }
+
     protected function checkIfOnlyNumbers(): bool
     {
         if (!preg_match('/^\d+$/', $this->pesel)) {
