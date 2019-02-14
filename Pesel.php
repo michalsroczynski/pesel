@@ -4,7 +4,7 @@ namespace pesel;
 
 class Pesel
 {
-    protected $pesel, $month, $year, $day, $age, $birthDate, $now;
+    protected $pesel, $month, $year, $day, $age, $sex, $birthDate, $now;
     protected $isAdult = false;
 
     public function __construct(string $pesel)
@@ -15,23 +15,25 @@ class Pesel
         $this->day = substr($pesel, 4, 2);
         $this->birthDate = date_create($this->getCentury() . $this->year . '-' . $this->month . '-' . $this->day);
         $this->now = date_create();
+        $this->sex = $this->setSex(substr($pesel, 9, 1));
     }
 
-    public function validate()
+    public function validate(): object
     {
         try {
             if ($this->checkIfOnlyNumbers()
-            && $this->officialValidation()
-            && $this->verifyBirthDate()
+                && $this->checkLength()
+                && $this->officialValidation()
+                && $this->verifyBirthDate()
             ) {
-                echo 'ok';
+                return json_encode([
+
+                ]);
             }
 
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
-
-        return true;
     }
 
     protected function checkIfOnlyNumbers(): bool
@@ -40,6 +42,11 @@ class Pesel
             throw new \Exception('PESEL has invalid characters!');
         }
 
+        return true;
+    }
+
+    protected function checkLength(): bool
+    {
         if (strlen($this->pesel) != 11) {
             throw  new \Exception('PESEL has incorrect length!');
         }
@@ -71,20 +78,20 @@ class Pesel
 
     protected function verifyBirthDate(): bool
     {
-        $dateDifferance = $this->getDateDiff($this->now, $this->birthDate, '%R%a');
+        $dateDifferance = $this->getDateDiff('%R%a');
         if ($dateDifferance > 0) {
             throw new \Exception('Birth date from future!');
         }
 
-        $this->age = $this->getDateDiff($this->now, $this->birthDate, '%Y');
+        $this->age = $this->getDateDiff('%Y');
         $this->isAdult = $this->age >= 18;
 
         return true;
     }
 
-    protected function getDateDiff(\DateTime $date1, \DateTime $date2, string $format): string
+    protected function getDateDiff(string $format): string
     {
-        return date_diff($date1, $date2)->format($format);
+        return date_diff($this->now, $this->birthDate)->format($format);
     }
 
     protected function getCentury(): string
@@ -104,5 +111,10 @@ class Pesel
             }
         }
         throw new \Exception('Invalid month!');
+    }
+
+    protected function setSex($number): string
+    {
+        return $number % 2 == 0 ? 'Female' : 'Male';
     }
 }
