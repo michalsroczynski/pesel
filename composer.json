@@ -12,5 +12,10 @@
             "email": "sro.michal@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Pesel\\": "src/"
+        }
+    },
     "minimum-stability": "stable"
 }
