@@ -1,0 +1,16 @@
+{
+    "name": "ms/pesel",
+    "description": "PESEL validation",
+    "type": "library",
+    "require": {
+        "php": ">=7.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michał Sroczyński",
+            "email": "sro.michal@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
