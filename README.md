@@ -5,13 +5,13 @@
 
 ## Usage
 
-####Create object:
+###Create object:
 ```php
 $peselNumber = '12345678901';
 $pesel = new Pesel($peselNumber);
 ```
 
-####Validate:
+###Validate:
 ```php
 $pesel->validate()
 ```
@@ -34,7 +34,7 @@ array (
 )
 ```
 
-####Get birth date as timestamp:
+###Get birth date as timestamp:
 
 ```php
 $pesel->getBirthDate()
