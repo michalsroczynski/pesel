@@ -1,6 +1,6 @@
 {
     "name": "michalsroczynski/pesel",
-    "description": "PESEL validation",
+    "description": "Walidacja numeru PESEL. Oprócz oficjalnej walidacji, sprawdza długość i poprawność wszystkich znaków w numerze PESEL, oraz datę urodzenia - czy nie jest z przyszłości.",
     "type": "library",
     "require": {
         "php": ">=7.2"
@@ -14,8 +14,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Pesel\\": "src/s"
+            "Pesel\\": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
