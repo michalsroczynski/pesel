@@ -8,13 +8,16 @@ Obiekt klasy waliduje numer PESEL używając oficjalnej walidacji opartej na wag
 Metoda `validate()` przed rozpoczęciem walidacji sprawdza poprawność znaków w numerze: 
 czy jest ich 11 i czy nie zawierają innych znaków niż cyfry. Ponadto sprawdzane jest czy 
 data w numerze PESEL nie jest z przyszłości. Umożliwia to sprawdzenie czy ktoś nie podał 
-wygenerowanego numeru. Metoda `getBirthDate()` zwraca datę urodzenia w czasie unixowym.
+wygenerowanego numeru. Funkcja zwraca tablicę zawierającą m.in.: wiek, płeć, czy osoba jest 
+pełnoletnia i ewentualne błędy w numerze. Metoda `getBirthDate()` zwraca datę urodzenia w 
+czasie unixowym.
 
 ---
 Class' object validate PESEL number by using official validation method based on weights. 
-Method `validate()` before it start validation, checks if all characters are correct: 
+Method `validate()` before it starts validation, checks if all characters are correct: 
 if there are 11 characters and only digits. More over it checks if birth date is not from 
 future. Because of this you can be sure if someone didn't provide some generated PESEL number. 
+Function returns an array with: age, sex, information about being adult, and errors if there are any. 
 Method `getBirthDate()` return birth date in unix time stamp.
 
 ## Usage
