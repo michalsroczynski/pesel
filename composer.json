@@ -1,5 +1,5 @@
 {
-    "name": "ms/pesel",
+    "name": "michalsroczynski/pesel",
     "description": "PESEL validation",
     "type": "library",
     "require": {
