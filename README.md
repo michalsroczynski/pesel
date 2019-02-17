@@ -3,6 +3,7 @@
 ![](https://img.shields.io/github/release/michalsroczynski/pesel.svg?style=plastic)
 ![](https://img.shields.io/github/repo-size/michalsroczynski/pesel.svg?style=plastic)
 ![](https://img.shields.io/github/downloads/michalsroczynski/pesel/total.svg?style=plastic)
+![](https://img.shields.io/packagist/dt/michalsroczynski/pesel.svg?label=packagist%20downloads&style=plastic)
 
 Obiekt klasy waliduje numer PESEL używając oficjalnej walidacji opartej na wagach. 
 Metoda `validate()` przed rozpoczęciem walidacji sprawdza poprawność znaków w numerze: 
