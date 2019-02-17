@@ -14,8 +14,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Pesel\\": "src/"
+            "Pesel\\": "src/s"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
